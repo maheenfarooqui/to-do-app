@@ -11,7 +11,7 @@ function addTodo() {
                       <i class="fa-regular fa-circle text-info fs-5"></i>
                     </div>
                     <div>
-                      <p class="m-0 fw-medium task-text">
+                      <p class="m-0 fw-medium task-text" id="editText">
                        ${todoInput.value}
                       </p>
                       <small class="text-secondary" style="font-size: 10px">
@@ -22,7 +22,7 @@ function addTodo() {
                   <div class="d-flex gap-3 action-icons">
                     <i
                       class="fa-solid fa-pen-to-square edit-btn text-secondary"
-                      style="cursor: pointer"
+                      style="cursor: pointer" onclick="editTodo(this)"
                     ></i>
                     <i
                       class="fa-solid fa-trash-can delete-btn text-secondary"
@@ -33,7 +33,14 @@ function addTodo() {
               </ul>`;
   todoInput.value = "";
 }
+function editTodo(editBtn){
+    console.log(editBtn.parentNode.parentNode);
+    var editTextP =editBtn.parentNode.parentNode
+    var mainText = editTextP.closest("#editText")
+    console.log(mainText);
+    
 
+}
 
 function deletTodo(dltBtn){
 dltBtn.closest(".list-unstyled").innerHTML = "";
