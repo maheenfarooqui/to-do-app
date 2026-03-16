@@ -1,7 +1,8 @@
 var todoInput = document.getElementById("todoInput");
 var todoList = document.getElementById("todoList");
+var todoEdit ="";
 function addTodo() {
-  
+  if(todoEdit === ""){
   todoList.innerHTML += `<ul class="list-unstyled p-0 m-0">
                 <li
                   class="todo-item d-flex align-items-center justify-content-between"
@@ -31,12 +32,25 @@ function addTodo() {
                   </div>
                 </li>
               </ul>`;
+            }else{
+               console.log("error");
+                todoEdit =todoInput.value
+                var myTExt =todoEdit.childNodes[1].childNodes[3].childNodes[1].innerHTML.trim()
+               console.log(todoEdit, todoInput.value), myTExt;
+               
+               
+               
+               
+            }
   todoInput.value = "";
 }
 function editTodo(editBtn){
     var editTextP =editBtn.parentNode.parentNode
     var mainText = editTextP.childNodes[1].childNodes[3].childNodes[1].innerHTML.trim()
     todoInput.value = mainText;
+    todoEdit = mainText
+    console.log(todoEdit);
+    
     
 
 }
