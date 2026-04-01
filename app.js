@@ -1,14 +1,16 @@
 var todoInput = document.getElementById("todoInput");
 var todoList = document.getElementById("todoList");
-var todoEdit ="";
 function addTodo() {
-  if(todoEdit === ""){
-  todoList.innerHTML += `<ul class="list-unstyled p-0 m-0">
+  if (todoInput.value === "") {
+    alert("fill the field");
+    
+  } else {
+    todoList.innerHTML += `<ul class="list-unstyled p-0 m-0">
                 <li
                   class="todo-item d-flex align-items-center justify-content-between"
                 >
                   <div class="d-flex align-items-center gap-3">
-                    <div class="task-icon" style="cursor: pointer">
+                    <div class="task-icon" style="cursor: pointer" onclick="taskDone(this)">
                       <i class="fa-regular fa-circle text-info fs-5"></i>
                     </div>
                     <div>
@@ -16,7 +18,7 @@ function addTodo() {
                        ${todoInput.value}
                       </p>
                       <small class="text-secondary" style="font-size: 10px">
-                        <i class="fa-regular fa-clock me-1"></i> ${moment().format('LT')}
+                        <i class="fa-regular fa-clock me-1"></i> ${moment().format("LT")}
                       </small>
                     </div>
                   </div>
@@ -32,32 +34,30 @@ function addTodo() {
                   </div>
                 </li>
               </ul>`;
-            }else{
-               console.log("error");
-                todoEdit =todoInput.value
-                var myTExt =todoEdit.childNodes[1].childNodes[3].childNodes[1].innerHTML.trim()
-               console.log(todoEdit, todoInput.value), myTExt;
-               
-               
-               
-               
-            }
+    
+  }
   todoInput.value = "";
 }
-function editTodo(editBtn){
-    var editTextP =editBtn.parentNode.parentNode
-    var mainText = editTextP.childNodes[1].childNodes[3].childNodes[1].innerHTML.trim()
-    todoInput.value = mainText;
-    todoEdit = mainText
-    console.log(todoEdit);
-    
-    
+function editTodo(editBtn) {
+  var editTextP = editBtn.parentNode.parentNode;
+  var mainText =
+    editTextP.childNodes[1].childNodes[3].childNodes[1].innerHTML.trim();
+  todoInput.value = mainText;
+  editTextP.parentNode.innerHTML = "";
+}
+function taskDone(taskBtn) {
+  taskBtn.children[0].classList.toggle("fa-circle");
+  taskBtn.children[0].classList.toggle("fa-circle-check");
 
+  var ptag = taskBtn.parentNode;
+  var tagtag = ptag.children[1].children[0];
+
+  tagtag.classList.toggle("task-done");
 }
 
-function deletTodo(dltBtn){
-dltBtn.closest(".list-unstyled").innerHTML = "";
+function deletTodo(dltBtn) {
+  dltBtn.closest(".list-unstyled").innerHTML = "";
 }
-function clearAll(){
-    todoList.innerHTML = "";
+function clearAll() {
+  todoList.innerHTML = "";
 }
